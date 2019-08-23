@@ -1,0 +1,27 @@
+{
+  "name": "gatsby-theme-localization",
+  "version": "0.0.2",
+  "main": "index.js",
+  "author": "Martin Koparanov",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "clean": "gatsby clean",
+    "develop": "gatsby develop"
+  },
+  "dependencies": {
+    "chokidar": "^3.0.2",
+    "gatsby-plugin-i18n": "^1.0.1",
+    "i18next": "^17.0.12",
+    "i18next-xhr-backend": "^3.1.2",
+    "react-i18next": "^10.12.2"
+  },
+  "peerDependencies": {
+    "gatsby": "^2.6.0"
+  },
+  "devDependencies": {
+    "gatsby": "^2.13.77",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
+}
