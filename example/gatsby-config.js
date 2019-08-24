@@ -9,7 +9,15 @@ module.exports = {
         namespaces: ['translation', 'about'],
         localesDir: './src/locales',
         allowIndex: false,
-        defaultLng: 'en'
+        defaultLng: 'en',
+        i18next: {
+          debug: process.env.NODE_ENV !== 'production'
+        },
+        intlPlugin: {
+          // whatever you want to pass to gatsby-plugin-intl
+          langKeyDefault: 'en',
+          useLangKeyLayout: false
+        }
       }
     }
   ]

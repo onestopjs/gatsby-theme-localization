@@ -2,6 +2,7 @@ import React from "react";
 import i18n from "./i18n";
 import WrapRoot from "./wrap-root";
 import getLangFromPathname from "./utils/getLangFromPathname";
+import defaultOptions from "./defaultOptions";
 
 const getInitialLang = (pathname, options) => {
   const pathLang = getLangFromPathname(pathname);
@@ -14,16 +15,13 @@ const getInitialLang = (pathname, options) => {
 
 export const wrapRootElement = ({ element }, options) => {
   const initialLang = getInitialLang(window.location.pathname, options);
-  i18n.init({
-    lng: initialLang,
-    debug: true,
 
-    interpolation: {
-      escapeValue: false // not needed for react as it escapes by default
-    },
-    react: {
-      useSuspense: false
-    }
+  const i18nextOptions = options.i18next || {};
+
+  i18n.init({
+    ...defaultOptions,
+    ...i18nextOptions,
+    lng: initialLang
   });
 
   return (
