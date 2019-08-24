@@ -27,13 +27,13 @@ const WrapRoot = ({
   }, [location.pathname]);
 
   useEffect(() => {
-    if (languages.includes(lang)) {
+    if (languages.includes(lang) && i18nInstance.language !== lang) {
       i18nInstance.changeLanguage(lang);
     }
-  }, [lang]);
+  }, [lang, i18nInstance, languages]);
 
   useEffect(() => {
-    const currentLang = getLangFromPathname(location.pathname);
+    const currentLang = lang;
     if (languages.includes(currentLang) && currentLang !== i18n.language) {
       const currentPathWithoutLanguage = location.pathname.substring(3);
       const newPath = `/${i18n.language}/${trimSlashes(
@@ -41,7 +41,7 @@ const WrapRoot = ({
       )}`;
       navigate(newPath);
     }
-  }, [i18n.language]);
+  }, [i18n.language, languages, lang, navigate, location.pathname]);
 
   const renderChildren = useMemo(() => {
     if (allowIndex) return true;
@@ -50,7 +50,7 @@ const WrapRoot = ({
     }
 
     return true;
-  }, [location.pathname]);
+  }, [location.pathname, allowIndex]);
 
   if (!renderChildren) {
     const probableLanguage = navigator.language;

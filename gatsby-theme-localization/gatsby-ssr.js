@@ -4,6 +4,7 @@ import i18n from './i18n';
 import fs from 'fs';
 import path from 'path';
 import getLangFromPathname from './utils/getLangFromPathname';
+import defaultOptions from './defaultOptions';
 
 export const replaceRenderer = ({bodyComponent, pathname, replaceBodyHTMLString}, {languages = [], namespaces = [], ...options}) => {
   const initialLang = getLangFromPathname(pathname);
@@ -20,16 +21,13 @@ export const replaceRenderer = ({bodyComponent, pathname, replaceBodyHTMLString}
       }, {})
     };
   }, {})
-  i18n.init({
-    lng: initialLang,
-    debug: true,
 
-    interpolation: {
-      escapeValue: false // not needed for react as it escapes by default
-    },
-    react: {
-      useSuspense: false
-    },
+  const i18nextOptions = options.i18next || {};
+
+  i18n.init({
+    ...defaultOptions,
+    ...i18nextOptions,
+    lng: initialLang,
     resources
   });
 
