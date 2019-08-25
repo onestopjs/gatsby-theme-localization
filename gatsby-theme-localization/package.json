@@ -2,6 +2,7 @@
   "name": "gatsby-theme-localization",
   "version": "1.0.2",
   "main": "index.js",
+  "types": "index.d.ts",
   "author": "Martin Koparanov",
   "description": "Full solution for Gatsby localization",
   "license": "MIT",
@@ -14,16 +15,20 @@
   },
   "homepage": "https://github.com/PsychedMagnet/gatsby-theme-localization",
   "scripts": {
-    "build": "gatsby build",
-    "clean": "gatsby clean",
+    "build": "tsc",
     "develop": "gatsby develop"
   },
   "dependencies": {
+    "@types/node": "^12.7.2",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
     "chokidar": "^3.0.2",
     "gatsby-plugin-i18n": "^1.0.1",
     "i18next": "^17.0.12",
     "i18next-xhr-backend": "^3.1.2",
-    "react-i18next": "^10.12.2"
+    "react-i18next": "^10.12.2",
+    "typescript": "^3.5.3",
+    "utility-types": "^3.7.0"
   },
   "peerDependencies": {
     "gatsby": "^2.6.0"

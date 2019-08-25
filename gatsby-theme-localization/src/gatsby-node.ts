@@ -1,3 +1,8 @@
+import { PluginOptions } from "./types";
+import fs from "fs";
+import path from "path";
+import chokidar from "chokidar";
+
 /**
  * Implement Gatsby's Node APIs in this file.
  *
@@ -8,12 +13,8 @@
 
 process.env.GATSBY_SSR_DIRNAME = __dirname;
 
-const fs = require("fs");
-const chokidar = require("chokidar");
-const path = require("path");
-
 // user settings
-const options = {
+const options: PluginOptions = {
   languages: [],
   namespaces: [],
   localesDir: "./src/locales",
@@ -91,7 +92,7 @@ const moveFiles = async () => {
   return;
 };
 
-exports.onPreBootstrap = (_, userOptions) => {
+export const onPreBootstrap = (_: any, userOptions: PluginOptions) => {
   // set up options
   // TODO: dont do it like that
   options.languages = userOptions.languages || options.languages;
@@ -99,7 +100,7 @@ exports.onPreBootstrap = (_, userOptions) => {
   options.localesDir = userOptions.localesDir || options.localesDir;
 };
 
-exports.onPostBootstrap = async () => {
+export const onPostBootstrap = async () => {
   await moveFiles();
 
   // set up listeners while developing
