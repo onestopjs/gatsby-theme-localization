@@ -94,9 +94,9 @@ const moveFiles = async () => {
 exports.onPreBootstrap = (_, userOptions) => {
   // set up options
   // TODO: dont do it like that
-  options.languages = userOptions.languages;
-  options.namespaces = userOptions.namespaces;
-  options.localesDir = userOptions.localesDir;
+  options.languages = userOptions.languages || options.languages;
+  options.namespaces = userOptions.namespaces || options.namespaces;
+  options.localesDir = userOptions.localesDir || options.localesDir;
 };
 
 exports.onPostBootstrap = async () => {
