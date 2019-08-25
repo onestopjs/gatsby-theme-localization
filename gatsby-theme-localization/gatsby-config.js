@@ -1,9 +1,9 @@
-module.exports = ({ intlPlugin = {} }) => ({
+module.exports = ({ i18nPlugin = {} }) => ({
   plugins: [
     {
       resolve: 'gatsby-plugin-i18n',
       options: {
-        ...intlPlugin
+        ...i18nPlugin
       }
     }
   ]
