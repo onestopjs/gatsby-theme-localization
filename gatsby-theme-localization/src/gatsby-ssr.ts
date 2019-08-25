@@ -3,10 +3,17 @@ import i18n from './i18n';
 
 import fs from 'fs';
 import path from 'path';
+import {ReplaceRendererArgs as OriginalReplaceRendererArgs} from 'gatsby';
 import getLangFromPathname from './utils/getLangFromPathname';
 import defaultOptions from './defaultOptions';
 
-export const replaceRenderer = ({bodyComponent, pathname, replaceBodyHTMLString}, {languages = [], namespaces = [], ...options}) => {
+// for some reason pathname and bodyComponetn are not present in ReplaceRendererArgs, so this is a temporary solution
+interface ReplaceRendererArgs extends OriginalReplaceRendererArgs {
+  pathname: string;
+  bodyComponent: React.ReactElement
+}
+
+export const replaceRenderer = ({bodyComponent, pathname, replaceBodyHTMLString}: ReplaceRendererArgs, {languages = [], namespaces = [], ...options}) => {
   const initialLang = getLangFromPathname(pathname);
   const resources = languages.reduce((acc, lang) => {
     return {

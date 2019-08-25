@@ -1,9 +1,11 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, FunctionComponent } from "react";
 import { I18nextProvider, useTranslation } from "react-i18next";
-import withLocation from "./utils/withLocation";
+import withLocation, { WithLocationProps } from "./utils/withLocation";
 import getLangFromPathname from "./utils/getLangFromPathname";
+import { i18n } from "i18next";
+import { PluginOptions } from "./types";
 
-const trimSlashes = str => {
+const trimSlashes = (str: string) => {
   const withoutTrailing = str.endsWith("/")
     ? str.substring(0, str.length - 1)
     : str;
@@ -13,7 +15,13 @@ const trimSlashes = str => {
   return withoutPrepended;
 };
 
-const WrapRoot = ({
+interface WrapRootProps extends WithLocationProps {
+  children: React.ReactNode;
+  i18n: i18n;
+  options: PluginOptions;
+}
+
+const WrapRoot: FunctionComponent<WrapRootProps> = ({
   children,
   i18n: i18nInstance,
   location,
@@ -65,4 +73,4 @@ const WrapRoot = ({
   return <I18nextProvider i18n={i18nInstance}>{children}</I18nextProvider>;
 };
 
-export default withLocation(WrapRoot);
+export default withLocation<WrapRootProps>(WrapRoot);
