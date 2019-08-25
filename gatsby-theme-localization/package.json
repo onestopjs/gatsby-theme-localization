@@ -35,6 +35,7 @@
   },
   "keywords": [
     "gatsby",
+    "gatsby-plugin",
     "gatsby-theme",
     "gatsby-theme-localization",
     "localization"
