@@ -13,8 +13,8 @@ module.exports = {
         i18next: {
           debug: process.env.NODE_ENV !== 'production'
         },
-        intlPlugin: {
-          // whatever you want to pass to gatsby-plugin-intl
+        i18nPlugin: {
+          // whatever you want to pass to gatsby-plugin-i18n
           langKeyDefault: 'en',
           useLangKeyLayout: false
         }
