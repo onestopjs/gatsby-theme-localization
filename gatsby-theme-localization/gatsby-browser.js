@@ -10,7 +10,7 @@ const getInitialLang = (pathname, options) => {
 
   if (options.languages.includes(navigator.language)) return navigator.language;
 
-  return options.defaultLng;
+  return options.defaultLng || 'en';
 };
 
 export const wrapRootElement = ({ element }, options) => {
