@@ -1,6 +1,6 @@
 {
   "name": "gatsby-theme-localization",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "author": "Martin Koparanov",
   "description": "Full solution for Gatsby localization",
@@ -32,5 +32,11 @@
     "gatsby": "^2.13.77",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
-  }
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-theme",
+    "gatsby-theme-localization",
+    "localization"
+  ]
 }
