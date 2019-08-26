@@ -42,7 +42,7 @@ Currently, the way to store your translations is in a JSON file (although in the
 For each language your page has, create a file in pages following this pattern: [your page name].[language].js.
 An example of this is `index.en.js`. Inside your page component, you can use all of [react-i18next](https://react.i18next.com/)'s features. For me, the most convenient way is to use the `useTranslation` hook. If your page is the same for all languages, you can just reexport your page component in all languages you want, although this is often not the case.
 
-This theme exports a drop-in replacement for Gatsby's link. In fact, it forwards all props to the original Gatsby link, except for the "to" prop, which is enhanced to prefix the current language. This feature can be disabled via the "prefixLanguage" prop. Currently, there are no types for this component, but I am planning on implementing it with TypeScript later.
+This theme exports a drop-in replacement for Gatsby's link. In fact, it forwards all props to the original Gatsby link, except for the "to" prop, which is enhanced to prefix the current language. This feature can be disabled via the "prefixLanguage" prop.
 
 In your locales folder, you need to create a folder for each language you support, and a JSON file for each namespace you want. It is important that all files exist, otherwise it will crash. This is intentional as I think it is better to crash your build rather than have missing texts.
 
@@ -65,8 +65,6 @@ Make sure to read both plugins' documentation to make use of their full capabili
 | Export | Description                           |
 |--------|---------------------------------------|
 | Link   | Drop-in replacement for Gatsby's Link |
-
-I am planning on adding TypeScript, so proper types will be exported soon.
 
 ## Disclaimer
 I am new to Gatsby, so it is possible this is written in a really suboptimal way. When I had all the knowledge to build this, I rushed to get it working so people can use it as soon as possible. As a result, the code is quite a mess now. My next goal will be to refactor and reorganize everything in a more maintainable manner, then I will start adding more features (such as remote translations). It is quite possible to have bugs or unforeseen use cases which prevent you from using this plugin. Please, open an issue in GitHub and I will try to address it as soon as possible.
