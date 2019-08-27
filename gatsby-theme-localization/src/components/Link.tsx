@@ -5,8 +5,8 @@ import { Namespace } from '../types';
 
 // had to exclude ref, see this issue: https://github.com/gatsbyjs/gatsby/issues/16682
 interface LinkProps extends Omit<GatsbyLinkProps<{}>, 'ref'> {
-  prefixLanguage: boolean;
-  preloadNamespaces: Namespace[];
+  prefixLanguage?: boolean;
+  preloadNamespaces?: Namespace[];
 }
 
 const Link: FunctionComponent<LinkProps> = ({to, prefixLanguage, preloadNamespaces, ...props}) => {
@@ -28,7 +28,8 @@ const Link: FunctionComponent<LinkProps> = ({to, prefixLanguage, preloadNamespac
 };
 
 Link.defaultProps = {
-  prefixLanguage: true
+  prefixLanguage: true,
+  preloadNamespaces: []
 }
 
 export default Link;
