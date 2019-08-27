@@ -13,8 +13,8 @@ const Layout = ({children}) => {
   const [t, i18n] = useTranslation();
   return <div>
     <div style={{width: '100%', background: 'purple', padding: '10px'}}>
-      <NavItem to="/">{t('home')}</NavItem>
-      <NavItem to="/about">{t('about')}</NavItem>
+      <NavItem to="/" preloadNamespaces={['translation']}>{t('home')}</NavItem>
+      <NavItem to="/about" preloadNamespaces={['about']}>{t('about')}</NavItem>
       <button
           style={{float: 'right', marginRight: '30px'}}
           onClick={() =>
