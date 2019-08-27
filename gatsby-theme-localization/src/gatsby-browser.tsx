@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense, Fragment} from "react";
 import i18n from "./i18n";
 import WrapRoot from "./wrap-root";
 import getLangFromPathname from "./utils/getLangFromPathname";
@@ -16,7 +16,7 @@ const getInitialLang = (pathname: string, options: PluginOptions) => {
 
 export const wrapRootElement = ({ element }: any, options: any) => {
   const initialLang = getInitialLang(window.location.pathname, options);
-
+  
   const i18nextOptions = options.i18next || {};
 
   i18n.init({
@@ -25,9 +25,14 @@ export const wrapRootElement = ({ element }: any, options: any) => {
     lng: initialLang
   });
 
+  const MaybeSuspense = typeof document !== "undefined" ? Suspense : Fragment;
+
   return (
-    <WrapRoot i18n={i18n} options={options} >
-      {element}
-    </WrapRoot>
+    <MaybeSuspense fallback="">
+      <WrapRoot i18n={i18n} options={options} >
+        {element}
+      </WrapRoot>
+    </MaybeSuspense>
+    
   );
 };

@@ -11,6 +11,10 @@ module.exports = {
         allowIndex: false,
         defaultLng: 'en',
         i18next: {
+          react: {
+            wait: true,
+            useSuspense: true
+          },
           debug: process.env.NODE_ENV !== 'production'
         },
         i18nPlugin: {
