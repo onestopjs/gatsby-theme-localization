@@ -1,5 +1,5 @@
 # gatsby-theme-localization
-Opinionated Gatsby theme which provides a full solution for localization in Gatsby. This theme is built upon the awesome [gatsby-plugin-intl](https://www.npmjs.com/package/gatsby-plugin-i18n) and [react-i18next](https://react.i18next.com/) and acts as a bridge between the two. I couldn't find a full solution for localization with Gatsby which works the way I want it to, so I made a custom solution for my personal website and put everything I learned in this Gatsby theme in hopes to help out anyone who may struggle with the same.
+Opinionated Gatsby theme which provides a full solution for localization in Gatsby. This theme is built upon the awesome [gatsby-plugin-i18n](https://www.npmjs.com/package/gatsby-plugin-i18n) and [react-i18next](https://react.i18next.com/) and acts as a bridge between the two. I couldn't find a full solution for localization with Gatsby which works the way I want it to, so I made a custom solution for my personal website and put everything I learned in this Gatsby theme in hopes to help out anyone who may struggle with the same.
 
 ## Getting started
 Using this plugin is really simple. First, install it by using `npm install gatsby-theme-localization`.
@@ -22,7 +22,7 @@ module.exports = {
           debug: process.env.NODE_ENV !== 'production'
         },
         i18nPlugin: {
-          // whatever you want to pass to gatsby-plugin-intl
+          // whatever you want to pass to gatsby-plugin-i18n
           langKeyDefault: 'en',
           useLangKeyLayout: false
         }
