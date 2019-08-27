@@ -12,3 +12,5 @@ export interface PluginOptions {
   i18next?: object;
   [key: string]: any;
 }
+
+export type Namespace = string;

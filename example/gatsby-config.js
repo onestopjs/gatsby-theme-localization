@@ -11,6 +11,7 @@ module.exports = {
         allowIndex: false,
         defaultLng: 'en',
         i18next: {
+          fallbackLng: 'en',
           react: {
             wait: true,
             useSuspense: true

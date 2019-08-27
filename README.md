@@ -5,8 +5,6 @@ Opinionated Gatsby theme which provides a full solution for localization in Gats
 Using this plugin is really simple. First, install it by using `npm install gatsby-theme-localization`.
 Add this to your `gatsby-config.js`:
 ```javascript
-const path = require('path');
-
 module.exports = {
   plugins: [
     {
@@ -19,6 +17,7 @@ module.exports = {
         defaultLng: 'en',
         i18next: {
           // whatever you want to pass to react-i18next
+          fallbackLng: 'en',
           debug: process.env.NODE_ENV !== 'production'
         },
         i18nPlugin: {
@@ -62,9 +61,12 @@ Make sure to read both plugins' documentation to make use of their full capabili
 | i18nPlugin | {}              | Object with options which will be passed to gatsby-plugin-i18n                                                     |
 
 ## Exports
-| Export | Description                           |
-|--------|---------------------------------------|
-| Link   | Drop-in replacement for Gatsby's Link |
+
+### Link
+| Prop              | Default | Description                                               |
+|-------------------|---------|-----------------------------------------------------------|
+| prefixLanguage    | true    | Prefix language before url (e.g. "/about" -> "/en/about") |
+| preloadNamespaces | []      | Namespaces to preload on hover for faster loading         |
 
 ## Disclaimer
 I am new to Gatsby, so it is possible this is written in a really suboptimal way. When I had all the knowledge to build this, I rushed to get it working so people can use it as soon as possible. As a result, the code is quite a mess now. My next goal will be to refactor and reorganize everything in a more maintainable manner, then I will start adding more features (such as remote translations). It is quite possible to have bugs or unforeseen use cases which prevent you from using this plugin. Please, open an issue in GitHub and I will try to address it as soon as possible.
