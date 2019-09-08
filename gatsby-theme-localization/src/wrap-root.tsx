@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, FunctionComponent } from "react";
-import { I18nextProvider } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import withLocation, { WithLocationProps } from "./utils/withLocation";
 import getLangFromPathname from "./utils/getLangFromPathname";
-import { i18n } from "i18next";
 import { PluginOptions } from "./types";
 
 const trimSlashes = (str: string) => {
@@ -17,17 +16,16 @@ const trimSlashes = (str: string) => {
 
 interface WrapRootProps extends WithLocationProps {
   children: React.ReactNode;
-  i18n: i18n;
   options: PluginOptions;
 }
 
 const WrapRoot: FunctionComponent<WrapRootProps> = ({
   children,
-  i18n,
   location,
   navigate,
   options: { languages = [], allowIndex = false, defaultLng = "en" }
 }) => {
+  const [, i18n] = useTranslation();
   const lang = useMemo(() => {
     return getLangFromPathname(location.pathname);
   }, [location.pathname]);
@@ -70,7 +68,7 @@ const WrapRoot: FunctionComponent<WrapRootProps> = ({
     }
   }, [renderChildren, navigate, languages]);
 
-  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+  return <>{children}</>;
 };
 
 export default withLocation<WrapRootProps>(WrapRoot);
