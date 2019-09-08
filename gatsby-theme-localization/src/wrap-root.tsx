@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, FunctionComponent } from "react";
-import { I18nextProvider, useTranslation } from "react-i18next";
+import { I18nextProvider } from "react-i18next";
 import withLocation, { WithLocationProps } from "./utils/withLocation";
 import getLangFromPathname from "./utils/getLangFromPathname";
 import { i18n } from "i18next";
@@ -23,22 +23,20 @@ interface WrapRootProps extends WithLocationProps {
 
 const WrapRoot: FunctionComponent<WrapRootProps> = ({
   children,
-  i18n: i18nInstance,
+  i18n,
   location,
   navigate,
   options: { languages = [], allowIndex = false, defaultLng = "en" }
 }) => {
-  const [, i18n] = useTranslation();
-
   const lang = useMemo(() => {
     return getLangFromPathname(location.pathname);
   }, [location.pathname]);
 
   useEffect(() => {
-    if (languages.includes(lang) && i18nInstance.language !== lang) {
-      i18nInstance.changeLanguage(lang);
+    if (languages.includes(lang) && i18n.language !== lang) {
+      i18n.changeLanguage(lang);
     }
-  }, [lang, i18nInstance, languages]);
+  }, [lang, i18n, languages]);
 
   useEffect(() => {
     const currentLang = lang;
@@ -60,17 +58,19 @@ const WrapRoot: FunctionComponent<WrapRootProps> = ({
     return true;
   }, [location.pathname, allowIndex]);
 
-  if (!renderChildren) {
-    const probableLanguage = navigator.language;
-    navigate(
-      `/${
-        languages.includes(probableLanguage) ? probableLanguage : defaultLng
-      }`,
-      { replace: true }
-    );
-  }
+  useEffect(() => {
+    if (!renderChildren) {
+      const probableLanguage = navigator.language;
+      navigate(
+        `/${
+          languages.includes(probableLanguage) ? probableLanguage : defaultLng
+        }`,
+        { replace: true }
+      );
+    }
+  }, [renderChildren, navigate, languages]);
 
-  return <I18nextProvider i18n={i18nInstance}>{children}</I18nextProvider>;
+  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 };
 
 export default withLocation<WrapRootProps>(WrapRoot);
