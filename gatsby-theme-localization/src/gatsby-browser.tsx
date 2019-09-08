@@ -2,7 +2,7 @@ import React, {Suspense, Fragment} from "react";
 import i18n from "./i18n";
 import WrapRoot from "./wrap-root";
 import getLangFromPathname from "./utils/getLangFromPathname";
-import defaultOptions from "./defaultOptions";
+import {i18nextOptions as defaultI18nextOptions} from "./defaultOptions";
 import { PluginOptions } from "./types";
 
 const getInitialLang = (pathname: string, options: PluginOptions) => {
@@ -20,7 +20,7 @@ export const wrapRootElement = ({ element }: any, options: any) => {
   const i18nextOptions = options.i18next || {};
 
   i18n.init({
-    ...defaultOptions,
+    ...defaultI18nextOptions,
     ...i18nextOptions,
     lng: initialLang
   });

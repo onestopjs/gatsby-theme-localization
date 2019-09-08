@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import {ReplaceRendererArgs as OriginalReplaceRendererArgs} from 'gatsby';
 import getLangFromPathname from './utils/getLangFromPathname';
-import defaultOptions from './defaultOptions';
+import {i18nextOptions as defaultI18nextOptions} from './defaultOptions';
 
 // for some reason pathname and bodyComponetn are not present in ReplaceRendererArgs, so this is a temporary solution
 interface ReplaceRendererArgs extends OriginalReplaceRendererArgs {
@@ -32,7 +32,7 @@ export const replaceRenderer = ({bodyComponent, pathname, replaceBodyHTMLString}
   const i18nextOptions = options.i18next || {};
 
   i18n.init({
-    ...defaultOptions,
+    ...defaultI18nextOptions,
     ...i18nextOptions,
     lng: initialLang,
     resources
