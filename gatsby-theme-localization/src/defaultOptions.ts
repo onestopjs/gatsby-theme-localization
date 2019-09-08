@@ -1,4 +1,4 @@
-const defaultOptions = {
+export const i18nextOptions = {
   interpolation: {
     escapeValue: false // not needed for react as it escapes by default
   },
@@ -6,5 +6,3 @@ const defaultOptions = {
     useSuspense: false
   }
 };
-
-export default defaultOptions;
