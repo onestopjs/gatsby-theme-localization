@@ -6,6 +6,7 @@ import path from 'path';
 import {ReplaceRendererArgs as OriginalReplaceRendererArgs} from 'gatsby';
 import getLangFromPathname from './utils/getLangFromPathname';
 import {i18nextOptions as defaultI18nextOptions} from './defaultOptions';
+import {PluginOptions} from './types';
 
 // for some reason pathname and bodyComponetn are not present in ReplaceRendererArgs, so this is a temporary solution
 interface ReplaceRendererArgs extends OriginalReplaceRendererArgs {
@@ -13,8 +14,9 @@ interface ReplaceRendererArgs extends OriginalReplaceRendererArgs {
   bodyComponent: React.ReactElement
 }
 
-export const replaceRenderer = ({bodyComponent, pathname, replaceBodyHTMLString}: ReplaceRendererArgs, {languages = [], namespaces = [], ...options}) => {
-  const initialLang = getLangFromPathname(pathname);
+export const replaceRenderer = ({bodyComponent, pathname, replaceBodyHTMLString}: ReplaceRendererArgs, {languages = [], namespaces = [], ...options}: PluginOptions) => {
+  const langFromPathname = getLangFromPathname(pathname);
+  const initialLang = languages.includes(langFromPathname) ? langFromPathname : (options.defaultLng || 'en');
   const resources = languages.reduce((acc, lang) => {
     return {
       ...acc,
