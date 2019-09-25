@@ -1,6 +1,6 @@
 {
   "name": "gatsby-theme-localization",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "main": "index.js",
   "types": "index.d.ts",
   "author": "Martin Koparanov",
@@ -8,12 +8,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PsychedMagnet/gatsby-theme-localization.git"
+    "url": "https://github.com/onestopjs/gatsby-theme-localization.git"
   },
   "bugs": {
-    "url": "https://github.com/PsychedMagnet/gatsby-theme-localization/issues"
+    "url": "https://github.com/onestopjs/gatsby-theme-localization/issues"
   },
-  "homepage": "https://github.com/PsychedMagnet/gatsby-theme-localization",
+  "homepage": "https://github.com/onestopjs/gatsby-theme-localization",
   "scripts": {
     "build": "tsc",
     "develop": "gatsby develop"
