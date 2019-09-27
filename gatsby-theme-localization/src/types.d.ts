@@ -11,6 +11,7 @@ export interface PluginOptions {
   i18nPlugin?: object;
   i18next?: object;
   [key: string]: any;
+  suspenseFallback?: string;
 }
 
 export type Namespace = string;

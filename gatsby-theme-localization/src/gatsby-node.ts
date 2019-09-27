@@ -2,16 +2,7 @@ import { PluginOptions } from "./types";
 import fs from "fs";
 import path from "path";
 import chokidar from "chokidar";
-
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
-
-process.env.GATSBY_SSR_DIRNAME = __dirname;
+import { ParentSpanPluginArgs, CreateWebpackConfigArgs } from "gatsby";
 
 // user settings
 const options: PluginOptions = {
@@ -121,3 +112,21 @@ export const onPostBootstrap = async () => {
 
   return;
 };
+
+let suspenseFallbackComponent: string;
+
+export const onPreInit = ({}: ParentSpanPluginArgs, {suspenseFallback}: PluginOptions) => {
+  const defaultFallback = './components/DefaultFallback';
+  const optionComponent = suspenseFallback || defaultFallback;
+  suspenseFallbackComponent = optionComponent;
+};
+
+export const onCreateWebpackConfig = ({actions, plugins}: CreateWebpackConfigArgs) => {
+  actions.setWebpackConfig({
+    plugins: [
+      plugins.define({
+        'process.env.GATSBY_SUSPENSE_FALLBACK': JSON.stringify(suspenseFallbackComponent)
+      })
+    ]
+  })
+}
