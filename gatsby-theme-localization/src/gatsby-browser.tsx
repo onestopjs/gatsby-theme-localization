@@ -5,6 +5,7 @@ import getLangFromPathname from "./utils/getLangFromPathname";
 import {i18nextOptions as defaultI18nextOptions} from "./defaultOptions";
 import { PluginOptions } from "./types";
 import { I18nextProvider } from "react-i18next";
+import preferDefault from "./utils/preferDefault";
 
 const getInitialLang = (pathname: string, options: PluginOptions) => {
   const pathLang = getLangFromPathname(pathname);
@@ -26,10 +27,11 @@ export const wrapRootElement = ({ element }: any, options: any) => {
     lng: initialLang
   });
 
+  const Fallback: React.ComponentType = preferDefault(require(process.env.GATSBY_SUSPENSE_FALLBACK || ''));
   const MaybeSuspense = typeof document !== "undefined" ? Suspense : Fragment;
 
   return (
-    <MaybeSuspense fallback="">
+    <MaybeSuspense fallback={<Fallback />}>
       <I18nextProvider i18n={i18n}>
         <WrapRoot options={options} >
           {element}

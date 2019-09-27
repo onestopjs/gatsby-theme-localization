@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   plugins: [
     {
@@ -10,6 +8,7 @@ module.exports = {
         localesDir: './src/locales',
         allowIndex: false,
         defaultLng: 'en',
+        suspenseFallback: require.resolve(`./src/components/fallback`),
         i18next: {
           fallbackLng: 'en',
           react: {
