@@ -72,4 +72,4 @@ Make sure to read both plugins' documentation to make use of their full capabili
 I am new to Gatsby, so it is possible this is written in a really suboptimal way. When I had all the knowledge to build this, I rushed to get it working so people can use it as soon as possible. As a result, the code is quite a mess now. My next goal will be to refactor and reorganize everything in a more maintainable manner, then I will start adding more features (such as remote translations). It is quite possible to have bugs or unforeseen use cases which prevent you from using this plugin. Please, open an issue in GitHub and I will try to address it as soon as possible.
 
 ## License
-I don't understand how all of this works, so do whatever you like as long as you don't rip off my work and present it as yours.
+Licensed under the [MIT License](./LICENSE).
