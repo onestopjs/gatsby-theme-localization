@@ -62,7 +62,7 @@ For example usage, refer to the [example gatsby-config](https://github.com/onest
 | localesDir | './src/locales' | Directory where your JSON files are stored (relative to the root of your project) |
 | i18next    | {}              | Object with options which will be passed to i18next |
 | i18nPlugin | {}              | Object with options which will be passed to gatsby-plugin-i18n  |
-| suspenseFallback | {}              | Path to fallback component for Suspense |
+| suspenseFallback | undefined              | Path to fallback component for Suspense |
 
 ## Exports
 
