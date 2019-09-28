@@ -50,15 +50,19 @@ gatsby-plugin-i18n creates the routes for each language but doesn't do anything 
 Make sure to read both plugins' documentation to make use of their full capabilities. 
 
 ## Options API
-| Option     | Default         | Description                                                                                                        |
+
+For example usage, refer to the [example gatsby-config](https://github.com/onestopjs/gatsby-theme-localization/blob/master/example/gatsby-config.js).
+
+| Option     | Default         | Description |
 |------------|-----------------|--------------------------------------------------------------------------------------------------------------------|
-| languages  | []              | List of language you support                                                                                       |
-| namespaces | []              | List of namespaces you support                                                                                     |
+| languages  | []              | List of language you support |
+| namespaces | []              | List of namespaces you support  |
 | allowIndex | false           | This controls whether you want your "/" route to be accessible. If not, redirect to the user's preferred language |
-| defaultLng | 'en'            | Default language, used for a number of things (such as fallback when language cannot be detected)                  |
-| localesDir | './src/locales' | Directory where your JSON files are stored (relative to the root of your project)                                  |
-| i18next    | {}              | Object with options which will be passed to i18next                                                                |
-| i18nPlugin | {}              | Object with options which will be passed to gatsby-plugin-i18n                                                     |
+| defaultLng | 'en'            | Default language, used for a number of things (such as fallback when language cannot be detected) |
+| localesDir | './src/locales' | Directory where your JSON files are stored (relative to the root of your project) |
+| i18next    | {}              | Object with options which will be passed to i18next |
+| i18nPlugin | {}              | Object with options which will be passed to gatsby-plugin-i18n  |
+| suspenseFallback | {}              | Path to fallback component for Suspense |
 
 ## Exports
 
