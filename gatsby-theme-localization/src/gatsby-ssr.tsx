@@ -145,5 +145,5 @@ export const onRenderBody = (
     resourceBundle: JSON.stringify(resourceBundle)
   });
 
-  setHeadComponents(<Component />);
+  setHeadComponents(<Component key="resourceBundle" />);
 };
