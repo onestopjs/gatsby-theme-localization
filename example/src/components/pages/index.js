@@ -14,6 +14,4 @@ const IndexPage = () => {
   );
 };
 
-export const preloadNamespaces = ['edno', 'dve'];
-
 export default IndexPage;
