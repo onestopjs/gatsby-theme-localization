@@ -116,9 +116,13 @@ export const onRenderBody = (
     }
   });
 
-  // convert the Set to an array
-  const namespacesToPreload = [...namespacesToPreloadSet];
-  const languagesToPreload = [...languagesToPreloadSet];
+  // convert the Set to an array and remove invalid values
+  const namespacesToPreload = [...namespacesToPreloadSet].filter(ns => {
+    return options.namespaces.includes(ns);
+  });
+  const languagesToPreload = [...languagesToPreloadSet].filter(lang => {
+    return options.languages.includes(lang);
+  });;
 
   const resourceBundle: ResourceBundle[] = [];
 
