@@ -1,4 +1,5 @@
 import { TOptions } from "i18next";
+import { globalResourceBundleName } from "./utils/const";
 
 type LanguageType = string;
 type NamespaceType = string;
@@ -32,7 +33,7 @@ export type Namespace = string;
 
 declare global {
   interface Window { 
-    GATSBY_THEME_LOCALIZATION_BUNDLE: string; // actually ResourceBundle but JSON
+    [globalResourceBundleName]: string; // actually ResourceBundle but JSON
   }
 }
 
