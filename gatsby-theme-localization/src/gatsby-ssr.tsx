@@ -74,6 +74,21 @@ export const onRenderBody = (
   const namespacesToPreloadSet = new Set<Namespace>([]);
   const languagesToPreloadSet = new Set<LanguageType>([langFromPathname]);
 
+  if(options.embedTranslations.preloadFallbackLng && options.i18next && options.i18next.fallbackLng) {
+    const {fallbackLng} = options.i18next;
+    if(typeof fallbackLng === 'string'){
+      languagesToPreloadSet.add(fallbackLng)
+    }else if(Array.isArray(fallbackLng)) {
+      fallbackLng.forEach(lang => languagesToPreloadSet.add(lang))
+    }else if(typeof fallbackLng === 'object') {
+      Object.values(fallbackLng).forEach(langs => {
+        langs.forEach(lang => {
+          languagesToPreloadSet.add(lang)
+        })
+      })
+    }
+  }
+
   options.embedTranslations.preloadNamespaces.forEach(opt => {
     if (opt.exact === pathname) {
       opt.namespaces.forEach(ns => {
@@ -125,8 +140,6 @@ export const onRenderBody = (
 
     resourceBundle.push(obj);
   });
-
-  console.log("RESOURCE BUNDLE", JSON.stringify(resourceBundle));
 
   const Component = createPreloadNamespacesComponent({
     resourceBundle: JSON.stringify(resourceBundle)

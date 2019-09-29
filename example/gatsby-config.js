@@ -10,16 +10,15 @@ module.exports = {
         defaultLng: "en",
         suspenseFallback: require.resolve(`./src/components/fallback`),
         embedTranslations: {
+          preloadFallbackLng: true,
           preloadNamespaces: [
             {
               regex: "/.*/",
-              namespaces: ["translation"],
-              languages: ["en"]
+              namespaces: ["translation"]
             },
             {
               regex: "/about/",
-              namespaces: ["about"],
-              languages: ["en"]
+              namespaces: ["about"]
             }
           ]
         },

@@ -35,12 +35,9 @@ export const wrapRootElement = ({ element }: any, options: PluginOptions) => {
     const resourceBundle: ResourceBundle[] = JSON.parse(window[globalResourceBundleName])
     resourceBundle.forEach(rb => {
       Object.entries(rb.namespaces).forEach(([ns, bundle]) => {
-        console.log(`added LANG: ${rb.lang} NAMESPACE: ${ns}, bundle: ${bundle}`)
         i18n.addResourceBundle(rb.lang, ns, bundle);
       })
     })
-    console.log('LOADED NAMESPACES BG', i18n.getResourceBundle('bg', 'about'))
-    console.log('LOADED NAMESPACES EN', i18n.getResourceBundle('en', 'about'))
   }
 
   return (
