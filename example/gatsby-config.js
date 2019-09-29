@@ -18,7 +18,11 @@ module.exports = {
             },
             {
               regex: "/about/",
-              namespaces: ["about"]
+              namespaces: ["about"],
+              /* redundant as 'en' is fallbackLng (from i18next) and
+                 will always be loaded (because of preloadFallbackLng: true), 
+                 but just for the example */
+              languages: ["en"]
             }
           ]
         },
