@@ -3,17 +3,15 @@ import fs from "fs";
 import path from "path";
 import chokidar from "chokidar";
 import { ParentSpanPluginArgs, CreateWebpackConfigArgs } from "gatsby";
+import { defaultPluginOptions } from "./defaultOptions";
 
 // user settings
-const options: PluginOptions = {
-  languages: [],
-  namespaces: [],
-  localesDir: "./src/locales",
-  publicDir: "./public/locales"
-};
+const options: PluginOptions = defaultPluginOptions;
 
 let beingMoved = false;
 let waitingPrevious = false;
+
+const publicDir = "./public/locales";
 
 const movingDone = () =>
   new Promise(resolve => {
@@ -38,13 +36,13 @@ const moveFiles = async () => {
   await movingDone();
   beingMoved = true;
   // setup dirs first
-  if (!fs.existsSync(options.publicDir)) {
+  if (!fs.existsSync(publicDir)) {
     console.info("Creating locales folder");
-    fs.mkdirSync(options.publicDir);
+    fs.mkdirSync(publicDir);
   }
 
   options.languages.forEach(lang => {
-    const dir = `${options.publicDir}/${lang}`;
+    const dir = `${publicDir}/${lang}`;
     if (!fs.existsSync(dir)) {
       console.log(`Creating language directory for ${lang}`);
       fs.mkdirSync(dir);
@@ -64,7 +62,7 @@ const moveFiles = async () => {
               ? JSON.stringify(JSON.parse(rawJson))
               : JSON.stringify({});
             fs.writeFile(
-              path.resolve(options.publicDir, `./${lang}/${ns}.json`),
+              path.resolve(publicDir, `./${lang}/${ns}.json`),
               jsonToWrite,
               () => {
                 resolve();
