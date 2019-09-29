@@ -10,7 +10,12 @@ import {
 } from "gatsby";
 import getLangFromPathname from "./utils/getLangFromPathname";
 import { i18nextOptions as defaultI18nextOptions } from "./defaultOptions";
-import { PluginOptions, Namespace, ResourceBundle } from "./types";
+import {
+  PluginOptions,
+  Namespace,
+  ResourceBundle,
+  LanguageType
+} from "./types";
 import createPreloadNamespacesComponent from "./components/PreloadNamespacesComponent";
 
 // for some reason pathname and bodyComponent are not present in ReplaceRendererArgs, so this is a temporary solution
@@ -58,38 +63,56 @@ export const replaceRenderer = (
   });
 };
 
-export const onRenderBody = ({ pathname, setHeadComponents }: RenderBodyArgs, options: PluginOptions) => {
-  if (!options.preloadNamespaces) return;
+export const onRenderBody = (
+  { pathname, setHeadComponents }: RenderBodyArgs,
+  options: PluginOptions
+) => {
+  if (!options.embedTranslations) return;
+
+  const langFromPathname = getLangFromPathname(pathname);
 
   const namespacesToPreloadSet = new Set<Namespace>([]);
+  const languagesToPreloadSet = new Set<LanguageType>([langFromPathname]);
 
-  options.preloadNamespaces.forEach(opt => {
-    if(opt.exact === pathname) {
+  options.embedTranslations.preloadNamespaces.forEach(opt => {
+    if (opt.exact === pathname) {
       opt.namespaces.forEach(ns => {
         namespacesToPreloadSet.add(ns);
-      })
-    }
-
-    if(opt.regex) {
-      const regex = new RegExp(opt.regex);
-      if(regex.test(pathname)) {
-        opt.namespaces.forEach(ns => {
-          namespacesToPreloadSet.add(ns);
-        })
+      });
+      if (opt.languages) {
+        opt.languages.forEach(lang => {
+          languagesToPreloadSet.add(lang);
+        });
       }
     }
-  })
+
+    if (opt.regex) {
+      const regex = new RegExp(opt.regex);
+      if (regex.test(pathname)) {
+        opt.namespaces.forEach(ns => {
+          namespacesToPreloadSet.add(ns);
+        });
+        if (opt.languages) {
+          opt.languages.forEach(lang => {
+            languagesToPreloadSet.add(lang);
+          });
+        }
+      }
+    }
+  });
 
   // convert the Set to an array
   const namespacesToPreload = [...namespacesToPreloadSet];
+  const languagesToPreload = [...languagesToPreloadSet];
 
-  const langFromPathname = getLangFromPathname(pathname);
-  const resourceBundle: ResourceBundle[] = [
-    {
-      lang: langFromPathname,
+  const resourceBundle: ResourceBundle[] = [];
+
+  languagesToPreload.forEach(lang => {
+    const obj = {
+      lang: lang,
       namespaces: namespacesToPreload.reduce((acc, ns) => {
         const file = fs.readFileSync(
-          path.resolve(options.localesDir, `./${langFromPathname}/${ns}.json`),
+          path.resolve(options.localesDir, `./${lang}/${ns}.json`),
           "utf8"
         );
         const parsedTranslations = JSON.parse(file);
@@ -98,14 +121,16 @@ export const onRenderBody = ({ pathname, setHeadComponents }: RenderBodyArgs, op
           [ns]: parsedTranslations
         };
       }, {})
-    }
-  ]
+    };
 
-  console.log('RESOURCE BUNDLE', JSON.stringify(resourceBundle))
+    resourceBundle.push(obj);
+  });
 
-  const Component = createPreloadNamespacesComponent({resourceBundle: JSON.stringify(resourceBundle)})
+  console.log("RESOURCE BUNDLE", JSON.stringify(resourceBundle));
 
-  setHeadComponents(
-    <Component />
-  )
+  const Component = createPreloadNamespacesComponent({
+    resourceBundle: JSON.stringify(resourceBundle)
+  });
+
+  setHeadComponents(<Component />);
 };

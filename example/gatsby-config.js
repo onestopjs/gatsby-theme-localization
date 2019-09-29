@@ -3,33 +3,37 @@ module.exports = {
     {
       resolve: `gatsby-theme-localization`,
       options: {
-        languages: ['en', 'bg'],
-        namespaces: ['translation', 'about'],
-        localesDir: './src/locales',
+        languages: ["en", "bg"],
+        namespaces: ["translation", "about"],
+        localesDir: "./src/locales",
         allowIndex: false,
-        defaultLng: 'en',
+        defaultLng: "en",
         suspenseFallback: require.resolve(`./src/components/fallback`),
-        preloadNamespaces: [
-          {
-            regex: '/.*/',
-            namespaces: ['translation']
-          },
-          {
-            regex: '/about/',
-            namespaces: ['about']
-          }
-        ],
+        embedTranslations: {
+          preloadNamespaces: [
+            {
+              regex: "/.*/",
+              namespaces: ["translation"],
+              languages: ["en"]
+            },
+            {
+              regex: "/about/",
+              namespaces: ["about"],
+              languages: ["en"]
+            }
+          ]
+        },
         i18next: {
-          fallbackLng: 'en',
+          fallbackLng: "en",
           react: {
             wait: true,
             useSuspense: true
           },
-          debug: process.env.NODE_ENV !== 'production'
+          debug: process.env.NODE_ENV !== "production"
         },
         i18nPlugin: {
           // whatever you want to pass to gatsby-plugin-i18n
-          langKeyDefault: 'en',
+          langKeyDefault: "en",
           useLangKeyLayout: false
         }
       }
