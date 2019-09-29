@@ -31,7 +31,7 @@ export const wrapRootElement = ({ element }: any, options: PluginOptions) => {
   const Fallback: React.ComponentType = preferDefault(require(process.env.GATSBY_SUSPENSE_FALLBACK || ''));
   const MaybeSuspense = typeof document !== "undefined" ? Suspense : Fragment;
 
-  if(options.preloadNamespaces) {
+  if(options.embedTranslations) {
     const resourceBundle: ResourceBundle[] = JSON.parse(window[globalResourceBundleName])
     resourceBundle.forEach(rb => {
       Object.entries(rb.namespaces).forEach(([ns, bundle]) => {
@@ -39,7 +39,8 @@ export const wrapRootElement = ({ element }: any, options: PluginOptions) => {
         i18n.addResourceBundle(rb.lang, ns, bundle);
       })
     })
-    console.log('LOADED NAMESPACES', i18n.getResourceBundle('en', 'translation'))
+    console.log('LOADED NAMESPACES BG', i18n.getResourceBundle('bg', 'about'))
+    console.log('LOADED NAMESPACES EN', i18n.getResourceBundle('en', 'about'))
   }
 
   return (

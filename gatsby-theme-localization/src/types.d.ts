@@ -11,13 +11,19 @@ export interface PluginOptions {
   i18nPlugin?: object;
   i18next?: object;
   suspenseFallback?: string;
-  preloadNamespaces?: PreloadNamespace[]
+  embedTranslations?: EmbedTranslationsOption
 }
 
 interface PreloadNamespace {
   exact?: string;
   regex?: RegExp | string;
   namespaces: Namespace[]
+  languages?: LanguageType[];
+}
+
+interface EmbedTranslationsOption {
+  preloadFallbackLng?: boolean;
+  preloadNamespaces: PreloadNamespace[];
 }
 
 export type Namespace = string;
