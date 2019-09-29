@@ -1,3 +1,5 @@
+import { TOptions } from "i18next";
+
 type LanguageType = string;
 type NamespaceType = string;
 type LocaleDirType = string;
@@ -9,7 +11,7 @@ export interface PluginOptions {
   defaultLng?: string;
   allowIndex?: boolean,
   i18nPlugin?: object;
-  i18next?: object;
+  i18next?: TOptions;
   suspenseFallback?: string;
   embedTranslations?: EmbedTranslationsOption
 }
