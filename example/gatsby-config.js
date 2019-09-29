@@ -9,6 +9,16 @@ module.exports = {
         allowIndex: false,
         defaultLng: 'en',
         suspenseFallback: require.resolve(`./src/components/fallback`),
+        preloadNamespaces: [
+          {
+            regex: '/.*/',
+            namespaces: ['translation']
+          },
+          {
+            regex: '/about/',
+            namespaces: ['about']
+          }
+        ],
         i18next: {
           fallbackLng: 'en',
           react: {
