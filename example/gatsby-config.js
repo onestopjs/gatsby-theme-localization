@@ -4,7 +4,7 @@ module.exports = {
       resolve: `gatsby-theme-localization`,
       options: {
         languages: ["en", "bg"],
-        namespaces: ["translation", "about"],
+        namespaces: ["translation", "about", "contact"],
         localesDir: "./src/locales",
         allowIndex: false,
         defaultLng: "en",

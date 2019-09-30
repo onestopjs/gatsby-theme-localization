@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Fallback = () => {
-  return <div>LOADING...</div>;
+  return <div id="loading">LOADING...</div>;
 };
 
 export default Fallback;
