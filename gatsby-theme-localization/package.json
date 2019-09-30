@@ -16,7 +16,8 @@
   "homepage": "https://github.com/onestopjs/gatsby-theme-localization",
   "scripts": {
     "build": "tsc",
-    "develop": "gatsby develop"
+    "develop": "gatsby develop",
+    "test": "jest"
   },
   "dependencies": {
     "@types/node": "^12.7.4",
@@ -36,7 +37,13 @@
     "gatsby": "^2.13.77",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "typescript": "^3.6.2"
+    "typescript": "^3.6.2",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0"
   },
   "keywords": [
     "gatsby",

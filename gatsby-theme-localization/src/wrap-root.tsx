@@ -4,15 +4,23 @@ import withLocation, { WithLocationProps } from "./utils/withLocation";
 import getLangFromPathname from "./utils/getLangFromPathname";
 import { PluginOptions } from "./types";
 
-const trimSlashes = (str: string) => {
-  const withoutTrailing = str.endsWith("/")
-    ? str.substring(0, str.length - 1)
-    : str;
-  const withoutPrepended = withoutTrailing.startsWith("/")
-    ? withoutTrailing.substring(1)
-    : withoutTrailing;
-  return withoutPrepended;
-};
+// const trimSlashes = (str: string) => {
+//   const withoutTrailing = str.endsWith("/")
+//     ? str.substring(0, str.length - 1)
+//     : str;
+//   const withoutPrepended = withoutTrailing.startsWith("/")
+//     ? withoutTrailing.substring(1)
+//     : withoutTrailing;
+//   return withoutPrepended;
+// };
+
+const trimSlashes = (str: string, c = '/') => {
+  if (c === "]") c = "\\]";
+  if (c === "\\") c = "\\\\";
+  return str.replace(new RegExp(
+    "^[" + c + "]+|[" + c + "]+$", "g"
+  ), "");
+}
 
 interface WrapRootProps extends WithLocationProps {
   children: React.ReactNode;
@@ -40,9 +48,8 @@ const WrapRoot: FunctionComponent<WrapRootProps> = ({
     const currentLang = lang;
     if (languages.includes(currentLang) && currentLang !== i18n.language) {
       const currentPathWithoutLanguage = location.pathname.substring(3);
-      const newPath = `/${i18n.language}/${trimSlashes(
-        currentPathWithoutLanguage
-      )}`;
+      const trimmedPath = trimSlashes(currentPathWithoutLanguage);
+      const newPath = `/${i18n.language}/${trimmedPath}${trimmedPath ? '/' : ''}`;
       navigate(newPath);
     }
   }, [i18n.language, languages, lang, navigate, location.pathname]);
@@ -62,7 +69,7 @@ const WrapRoot: FunctionComponent<WrapRootProps> = ({
       navigate(
         `/${
           languages.includes(probableLanguage) ? probableLanguage : defaultLng
-        }`,
+        }/`,
         { replace: true }
       );
     }

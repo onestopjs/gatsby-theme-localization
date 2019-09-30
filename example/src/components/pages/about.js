@@ -7,7 +7,7 @@ const AboutPage = () => {
 
   return (
     <Layout>
-      <div>{t("page_title")}</div>
+      <h1 id="pageTitle">{t("page_title")}</h1>
     </Layout>
   );
 };

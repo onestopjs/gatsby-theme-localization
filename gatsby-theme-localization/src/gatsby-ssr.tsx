@@ -122,7 +122,7 @@ export const onRenderBody = (
   });
   const languagesToPreload = [...languagesToPreloadSet].filter(lang => {
     return options.languages.includes(lang);
-  });;
+  });
 
   const resourceBundle: ResourceBundle[] = [];
 

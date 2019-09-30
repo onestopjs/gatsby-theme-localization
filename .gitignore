@@ -4,3 +4,5 @@ node_modules
 gatsby-theme-localization/**/*.js
 gatsby-theme-localization/**/*.d.ts
 !gatsby-theme-localization/src/*
+!gatsby-theme-localization/jest*
+cypress/videos
