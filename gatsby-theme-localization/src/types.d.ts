@@ -1,27 +1,27 @@
-import { TOptions } from "i18next";
-import { globalResourceBundleName } from "./utils/const";
+import {TOptions} from 'i18next';
+import {globalResourceBundleName} from './utils/const';
 
-type LanguageType = string;
-type NamespaceType = string;
-type LocaleDirType = string;
+type Language = string;
+type Namespace = string;
+type LocaleDir = string;
 
-export interface PluginOptions {
-  languages: LanguageType[];
-  namespaces: NamespaceType[];
+interface PluginOptions {
+  languages: Language[];
+  namespaces: Namespace[];
   localesDir: LocaleDirType;
   defaultLng?: string;
-  allowIndex?: boolean,
+  allowIndex?: boolean;
   i18nPlugin?: object;
   i18next?: TOptions;
   suspenseFallback?: string;
-  embedTranslations?: EmbedTranslationsOption
+  embedTranslations?: EmbedTranslationsOption;
 }
 
 interface PreloadNamespace {
   exact?: string;
   regex?: RegExp | string;
-  namespaces: Namespace[]
-  languages?: LanguageType[];
+  namespaces: Namespace[];
+  languages?: Language[];
 }
 
 interface EmbedTranslationsOption {
@@ -29,17 +29,35 @@ interface EmbedTranslationsOption {
   preloadNamespaces: PreloadNamespace[];
 }
 
-export type Namespace = string;
-
 declare global {
-  interface Window { 
+  interface Window {
     [globalResourceBundleName]: string; // actually ResourceBundle but JSON
   }
 }
 
-export interface ResourceBundle {
-  lang: LanguageType;
+interface ResourceBundle {
+  lang: Language;
   namespaces: {
     [key: NamespaceType]: object;
-  }
+  };
 }
+
+interface GatsbyNodeFunction {
+  onPreBootstrap?: Function;
+  onPostBootstrap?: Function;
+  onPreInit?: Function;
+  onCreateWebpackConfig?: Function;
+}
+
+type GatsbyNodeFunctionMethods =
+  | 'onPreBootstrap'
+  | 'onPostBootstrap'
+  | 'onPreInit'
+  | 'onCreateWebpackConfig';
+
+interface GatsbySSRFunction {
+  replaceRenderer?: Function;
+  onRenderBody?: Function;
+}
+
+type GatsbySSRFunctionMethods = 'replaceRenderer' | 'onRenderBody';

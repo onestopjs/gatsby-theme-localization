@@ -1,4 +1,4 @@
-import { PluginOptions } from "./types";
+import {PluginOptions} from './types';
 
 export const i18nextOptions = {
   interpolation: {
@@ -12,5 +12,5 @@ export const i18nextOptions = {
 export const defaultPluginOptions: PluginOptions = {
   languages: [],
   namespaces: [],
-  localesDir: "./src/locales"
+  localesDir: './src/locales'
 };

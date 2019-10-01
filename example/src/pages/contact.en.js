@@ -1,3 +1,3 @@
-import ContactPage from "../components/pages/contact";
+import ContactPage from '../components/pages/contact';
 
 export default ContactPage;

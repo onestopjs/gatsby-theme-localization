@@ -22,7 +22,7 @@ jobs:
           command: yarn build:plugin
       - run:
           name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - run:
           name: Publish to NPM
           command: cd gatsby-theme-localization && npm publish --tag $(node get-tag.js)
@@ -79,14 +79,20 @@ workflows:
     jobs:
       - unit_test:
           filters:
+            branches:
+              only: master
             tags:
               only: /^v.*$/
       - e2e_test:
           filters:
+            branches:
+              only: master
             tags:
               only: /^v.*$/
       - build_and_publish:
           filters:
+            branches:
+              only: master
             tags:
               only: /^v.*$/
           requires:
