@@ -5,6 +5,5 @@ gatsby-theme-localization/**/*.js
 gatsby-theme-localization/**/*.d.ts
 !gatsby-theme-localization/src/*
 !gatsby-theme-localization/jest*
-!gatsby-theme-localization/get-tag.js
 cypress/videos
 cypress/screenshots

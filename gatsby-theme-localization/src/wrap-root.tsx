@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, FunctionComponent } from "react";
-import { useTranslation } from "react-i18next";
-import withLocation, { WithLocationProps } from "./utils/withLocation";
-import getLangFromPathname from "./utils/getLangFromPathname";
-import { PluginOptions } from "./types";
+import React, {useEffect, useMemo, FunctionComponent} from 'react';
+import {useTranslation} from 'react-i18next';
+import withLocation, {WithLocationProps} from './utils/withLocation';
+import getLangFromPath from './utils/getLangFromPath';
+import {PluginOptions} from './types';
+import getPathWithoutLang from './utils/getPathWithoutLang';
 
 // const trimSlashes = (str: string) => {
 //   const withoutTrailing = str.endsWith("/")
@@ -15,12 +16,10 @@ import { PluginOptions } from "./types";
 // };
 
 const trimSlashes = (str: string, c = '/') => {
-  if (c === "]") c = "\\]";
-  if (c === "\\") c = "\\\\";
-  return str.replace(new RegExp(
-    "^[" + c + "]+|[" + c + "]+$", "g"
-  ), "");
-}
+  if (c === ']') c = '\\]';
+  if (c === '\\') c = '\\\\';
+  return str.replace(new RegExp('^[' + c + ']+|[' + c + ']+$', 'g'), '');
+};
 
 interface WrapRootProps extends WithLocationProps {
   children: React.ReactNode;
@@ -31,13 +30,12 @@ const WrapRoot: FunctionComponent<WrapRootProps> = ({
   children,
   location,
   navigate,
-  options: { languages = [], allowIndex = false, defaultLng = "en" }
+  options: {languages = [], allowIndex = false, defaultLng = 'en'}
 }) => {
   const [, i18n] = useTranslation();
   const lang = useMemo(() => {
-    return getLangFromPathname(location.pathname);
+    return getLangFromPath(location.pathname);
   }, [location.pathname]);
-
   useEffect(() => {
     if (languages.includes(lang) && i18n.language !== lang) {
       i18n.changeLanguage(lang);
@@ -47,16 +45,18 @@ const WrapRoot: FunctionComponent<WrapRootProps> = ({
   useEffect(() => {
     const currentLang = lang;
     if (languages.includes(currentLang) && currentLang !== i18n.language) {
-      const currentPathWithoutLanguage = location.pathname.substring(3);
+      const currentPathWithoutLanguage = getPathWithoutLang(location.pathname);
       const trimmedPath = trimSlashes(currentPathWithoutLanguage);
-      const newPath = `/${i18n.language}/${trimmedPath}${trimmedPath ? '/' : ''}`;
+      const newPath = `/${i18n.language}/${trimmedPath}${
+        trimmedPath ? '/' : ''
+      }`;
       navigate(newPath);
     }
   }, [i18n.language, languages, lang, navigate, location.pathname]);
 
   const renderChildren = useMemo(() => {
     if (allowIndex) return true;
-    if (location.pathname === "/") {
+    if (location.pathname === '/') {
       return allowIndex;
     }
 
@@ -70,7 +70,7 @@ const WrapRoot: FunctionComponent<WrapRootProps> = ({
         `/${
           languages.includes(probableLanguage) ? probableLanguage : defaultLng
         }/`,
-        { replace: true }
+        {replace: true}
       );
     }
   }, [renderChildren, navigate, languages]);

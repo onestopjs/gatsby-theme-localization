@@ -1,4 +1,4 @@
-type SomeModule = { default: any } | any;
+type SomeModule = {default: any} | any;
 
 const preferDefault = (m: SomeModule) => (m && m.default) || m;
 
