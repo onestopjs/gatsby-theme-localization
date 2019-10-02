@@ -1,0 +1,95 @@
+version: 2.1
+jobs:
+  build_and_publish:
+    docker:
+      - image: node:10.16.3-alpine
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "package.json" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Build plugin
+          command: yarn build:plugin
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/.npmrc
+      - run:
+          name: Publish to NPM
+          command: cd gatsby-theme-localization && npm publish --tag $(node get-tag.js)
+  unit_test:
+    docker:
+      - image: node:10.16.3-alpine
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "package.json" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Unit test
+          command: yarn test
+  e2e_test:
+    docker:
+      - image: cypress/base:10
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "package.json" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: E2E Test
+          command: yarn test:e2e
+workflows:
+  version: 2
+  test:
+    jobs:
+      - unit_test
+      - e2e_test
+  build_and_publish:
+    jobs:
+      - unit_test:
+          filters:
+            tags:
+              only: /^v.*$/
+      - e2e_test:
+          filters:
+            tags:
+              only: /^v.*$/
+      - build_and_publish:
+          filters:
+            tags:
+              only: /^v.*$/
+          requires:
+            - unit_test
+            - e2e_test
+  
