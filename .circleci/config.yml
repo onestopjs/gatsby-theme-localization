@@ -80,19 +80,19 @@ workflows:
       - unit_test:
           filters:
             branches:
-              only: master
+              ignore: /.*/
             tags:
               only: /^v.*$/
       - e2e_test:
           filters:
             branches:
-              only: master
+              ignore: /.*/
             tags:
               only: /^v.*$/
       - build_and_publish:
           filters:
             branches:
-              only: master
+              ignore: /.*/
             tags:
               only: /^v.*$/
           requires:
