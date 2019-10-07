@@ -1,0 +1,26 @@
+{
+  "docs": {
+    "First Steps": [
+      "first-steps/introduction",
+      "first-steps/getting-started",
+      "first-steps/good-to-know"
+    ],
+    "Advanced": ["advanced/embedding-translations"],
+    "API Reference": [
+      "api/link",
+      {
+        "type": "subcategory",
+        "label": "Options",
+        "ids": [
+          "api/options/languages",
+          "api/options/namespaces",
+          "api/options/localesDir",
+          "api/options/allowIndex",
+          "api/options/defaultLng",
+          "api/options/suspenseFallback",
+          "api/options/embedTranslations"
+        ]
+      }
+    ]
+  }
+}
