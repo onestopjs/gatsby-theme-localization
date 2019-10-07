@@ -1,5 +1,31 @@
 version: 2.1
 jobs:
+  build_and_publish_docs:
+    docker:
+      - image: node:10.16.3-alpine
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "package.json" }}
+      - run:
+          name: Install Linux dependencies
+          command: apk update && apk add build-base libtool gcc automake autoconf
+      - run:
+          name: Install dependencies
+          command: cd docs/website && yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "package.json" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Build docs website
+          command: cd docs/website && yarn build
+      - run:
+          name: Deploy to Firebase
+          command: cd docs/website && ./node_modules/.bin/firebase deploy --token "$DOCS_FIREBASE_TOKEN"
   build_and_publish:
     docker:
       - image: node:10.16.3-alpine
@@ -75,6 +101,14 @@ workflows:
     jobs:
       - unit_test
       - e2e_test
+  build_and_publish_docs:
+    jobs:
+      - build_and_publish_docs:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^docs.*$/
   build_and_publish:
     jobs:
       - unit_test:
