@@ -1,5 +1,16 @@
 version: 2.1
 jobs:
+  build_and_publish_docs:
+    docker:
+      - image: node:10.16.3-alpine
+    steps:
+      - checkout
+      - install_dependencies:
+          name: Install dependencies
+          command: cd docs/website && yarn build
+      # - deploy:
+      #   name: Deploy to Firebase
+      #   command: 
   build_and_publish:
     docker:
       - image: node:10.16.3-alpine
@@ -75,6 +86,9 @@ workflows:
     jobs:
       - unit_test
       - e2e_test
+  build_and_publish_docs:
+    jobs:
+      - 
   build_and_publish:
     jobs:
       - unit_test:

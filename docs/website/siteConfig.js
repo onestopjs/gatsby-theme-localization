@@ -23,8 +23,8 @@ const users = [
 const siteConfig = {
   title: 'gatsby-theme-localization', // Title for your website.
   tagline: 'Opinionated localization plugin for Gatsby',
-  url: 'https://docs.onestopjs.dev', // Your website URL
-  baseUrl: '/gatsby-theme-localization/', // Base URL for your project */
+  url: 'https://gatsby-theme-localization.onestopjs.dev', // Your website URL
+  baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
