@@ -8,9 +8,9 @@ jobs:
       - install_dependencies:
           name: Install dependencies
           command: cd docs/website && yarn build
-      # - deploy:
-      #   name: Deploy to Firebase
-      #   command: 
+      - deploy:
+          name: Deploy to Firebase
+          command: cd docs/website && ./node_modules/.bin/firebase deploy --token "$DOCS_FIREBASE_TOKEN"
   build_and_publish:
     docker:
       - image: node:10.16.3-alpine
@@ -88,7 +88,12 @@ workflows:
       - e2e_test
   build_and_publish_docs:
     jobs:
-      - 
+      - build_and_publish_docs:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^docs.*$/
   build_and_publish:
     jobs:
       - unit_test:

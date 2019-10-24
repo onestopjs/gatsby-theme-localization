@@ -24,13 +24,14 @@ const siteConfig = {
   title: 'gatsby-theme-localization', // Title for your website.
   tagline: 'Opinionated localization plugin for Gatsby',
   url: 'https://gatsby-theme-localization.onestopjs.dev', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  baseUrl: '', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: 'gatsby-theme-localization',
+  // FOR SOME STUPID REASON YOU HAVE TO SET THIS TO NOTHING IF YOU DON'T WANT YOUR PROJECT TO BE BUILT IN A SUBDIRECTORY
+  projectName: '',
   organizationName: 'onestopjs',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
