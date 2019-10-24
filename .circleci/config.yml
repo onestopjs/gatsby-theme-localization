@@ -5,10 +5,13 @@ jobs:
       - image: node:10.16.3-alpine
     steps:
       - checkout
-      - install_dependencies:
+      - run:
           name: Install dependencies
+          command: cd docs/website && yarn
+      - run:
+          name: Build docs website
           command: cd docs/website && yarn build
-      - deploy:
+      - run:
           name: Deploy to Firebase
           command: cd docs/website && ./node_modules/.bin/firebase deploy --token "$DOCS_FIREBASE_TOKEN"
   build_and_publish:
