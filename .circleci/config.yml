@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Install Linux dependencies
-          command: apk update && apk add autoconf libtool automake gcc
+          command: apk update && apk add build-base
       - run:
           name: Install dependencies
           command: cd docs/website && yarn
