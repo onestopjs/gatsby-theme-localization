@@ -21,7 +21,7 @@ const users = [
 ];
 
 const siteConfig = {
-  docsVersion: '1.0.0', // Current version
+  docsVersion: '1.0.1', // Current version
   title: 'gatsby-theme-localization', // Title for your website.
   tagline: 'Opinionated localization plugin for Gatsby',
   url: 'https://gatsby-theme-localization.onestopjs.dev', // Your website URL
