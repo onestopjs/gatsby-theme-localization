@@ -1,5 +1,14 @@
+<p align="center">
+  <a href="https://gatsby-theme-localization.onestopjs.dev/">
+    <img alt="Logo" src ="https://gatsby-theme-localization.onestopjs.dev/img/logo.png" width="33%">
+  </a>
+</p>
+
 # gatsby-theme-localization
 Opinionated Gatsby theme which provides a full solution for localization in Gatsby. This theme is built upon the awesome [gatsby-plugin-i18n](https://www.npmjs.com/package/gatsby-plugin-i18n) and [react-i18next](https://react.i18next.com/) and acts as a bridge between the two. I couldn't find a full solution for localization with Gatsby which works the way I want it to, so I made a custom solution for my personal website and put everything I learned in this Gatsby theme in hopes to help out anyone who may struggle with the same.
+
+## Documentation
+This is a basic overview to get you started. For more advanced features or better documentation, please visit the [full documentation](https://gatsby-theme-localization.onestopjs.dev).
 
 ## Getting started
 Using this plugin is really simple. First, install it by using `npm install gatsby-theme-localization`.
@@ -71,9 +80,6 @@ For example usage, refer to the [example gatsby-config](https://github.com/onest
 |-------------------|---------|-----------------------------------------------------------|
 | prefixLanguage    | true    | Prefix language before url (e.g. "/about" -> "/en/about") |
 | preloadNamespaces | []      | Namespaces to preload on hover for faster loading         |
-
-## Disclaimer
-I am new to Gatsby, so it is possible this is written in a really suboptimal way. When I had all the knowledge to build this, I rushed to get it working so people can use it as soon as possible. As a result, the code is quite a mess now. My next goal will be to refactor and reorganize everything in a more maintainable manner, then I will start adding more features (such as remote translations). It is quite possible to have bugs or unforeseen use cases which prevent you from using this plugin. Please, open an issue in GitHub and I will try to address it as soon as possible.
 
 ## License
 Licensed under the [MIT License](./LICENSE).
