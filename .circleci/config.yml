@@ -6,6 +6,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Linux dependencies
+          command: apk update && apk add autoconf
+      - run:
           name: Install dependencies
           command: cd docs/website && yarn
       - run:
