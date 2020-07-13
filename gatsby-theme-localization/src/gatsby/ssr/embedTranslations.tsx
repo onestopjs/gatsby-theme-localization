@@ -95,7 +95,7 @@ export const onRenderBody = (
   });
 
   const Component = createPreloadNamespacesComponent({
-    resourceBundle: JSON.stringify(resourceBundle)
+    resourceBundle: JSON.stringify(resourceBundle).replace(/'/g, "\\'")
   });
 
   setHeadComponents(<Component key="resourceBundle" />);
