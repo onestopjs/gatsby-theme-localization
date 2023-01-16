@@ -1,10 +1,6 @@
-<p align="center">
-  <a href="https://gatsby-theme-localization.onestopjs.dev/">
-    <img alt="Logo" src ="https://gatsby-theme-localization.onestopjs.dev/img/logo.png" width="33%">
-  </a>
-</p>
-
 # gatsby-theme-localization
+⚠️This plugin is for Gatsby 2.x.x! There are better solutions out there for newer versions!
+
 Opinionated Gatsby theme which provides a full solution for localization in Gatsby. This theme is built upon the awesome [gatsby-plugin-i18n](https://www.npmjs.com/package/gatsby-plugin-i18n) and [react-i18next](https://react.i18next.com/) and acts as a bridge between the two. I couldn't find a full solution for localization with Gatsby which works the way I want it to, so I made a custom solution for my personal website and put everything I learned in this Gatsby theme in hopes to help out anyone who may struggle with the same.
 
 ## Documentation
